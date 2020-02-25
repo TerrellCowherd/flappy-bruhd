@@ -1,43 +1,201 @@
 namespace SpriteKind {
     export const BG = SpriteKind.create()
+    export const PowerUp = SpriteKind.create()
+    export const PowerDown = SpriteKind.create()
 }
-function hero () {
-    star = sprites.create(img`
-. . . . . . . 4 . . . . . . . . 
-. . . . . . . 5 4 . . . . . . . 
+function powerup () {
+    projectile2 = sprites.createProjectileFromSide(img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, -73, 0)
+    projectile2.setKind(SpriteKind.PowerUp)
+    projectile2.setPosition(170, Math.randomRange(0, 100))
+    animation.runImageAnimation(
+    projectile2,
+    [img`
+. . . . . . . 4 4 . . . . . . . 
 . . . . . . 4 5 5 4 . . . . . . 
-. . . . . . 5 1 1 5 . . . . . . 
-. . . . . 4 5 1 1 5 4 . . . . . 
-. . . . . 5 1 1 1 1 5 4 . . . . 
-. . . . 4 5 4 1 1 4 1 5 5 4 . . 
-. . . 4 5 1 4 5 1 4 5 1 1 5 4 . 
-. . 4 5 1 1 5 4 1 5 4 1 5 4 . . 
-. . 5 5 1 1 1 1 1 1 1 5 4 . . . 
-. . . 4 5 5 1 1 5 1 1 1 5 . . . 
-. . . . 4 5 1 1 5 5 1 1 5 4 . . 
-. . . . 4 5 1 5 4 4 5 1 1 4 . . 
-. . . . . 5 5 4 . . . 4 1 5 . . 
-. . . . . 5 4 . . . . . . 4 . . 
-. . . . . 4 . . . . . . . . . . 
-`, SpriteKind.Player)
-    star.ay = 300
+. . . . . . 4 5 5 4 . . . . . . 
+. . . . . 4 5 5 5 5 4 . . . . . 
+. . . . . 4 5 5 5 5 4 . . . . . 
+. 4 4 4 4 5 5 5 5 5 5 4 4 4 4 . 
+4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
+. 4 5 5 5 5 5 5 5 5 5 5 5 5 4 . 
+. . 4 5 5 5 5 5 5 5 5 5 5 4 . . 
+. . . 4 5 5 5 5 5 5 5 5 4 . . . 
+. . . 4 5 5 5 5 5 5 5 5 4 . . . 
+. . . 4 5 5 5 5 5 5 5 5 4 . . . 
+. . 4 5 5 5 5 4 4 5 5 5 5 4 . . 
+. . 4 5 5 5 4 . . 4 5 5 5 4 . . 
+. . 4 5 5 4 . . . . 4 5 5 4 . . 
+. . . 4 4 . . . . . . 4 4 . . . 
+`,img`
+. . . . . . . . . 5 5 . . . . . 
+. . . . . . . . 5 5 1 5 . . . . 
+. . . . . . . . 5 1 1 5 . . . . 
+. . 5 5 5 . . 5 1 1 1 5 . . . . 
+. 5 1 1 1 5 5 1 1 1 1 5 . . . . 
+. 5 1 1 1 1 1 1 1 1 1 1 5 . . . 
+. . 5 1 1 1 1 1 1 1 1 1 1 5 5 . 
+. . . 5 1 1 1 1 1 1 1 1 1 1 1 5 
+. . . . 5 1 1 1 1 1 1 1 1 1 5 5 
+. . . 5 1 1 1 1 1 1 1 1 1 5 5 . 
+. . 5 1 1 1 1 1 1 1 1 5 5 . . . 
+. . 5 1 1 1 1 1 1 1 1 5 . . . . 
+. 5 1 1 1 1 5 5 1 1 1 5 . . . . 
+. 5 1 1 5 5 . . 5 1 1 5 . . . . 
+. 5 5 5 . . . . 5 5 1 5 . . . . 
+. . . . . . . . . 5 5 . . . . . 
+`,img`
+. . . 4 4 . . . . . . 4 4 . . . 
+. . 4 5 5 4 . . . . 4 5 5 4 . . 
+. . 4 5 5 5 4 . . 4 5 5 5 4 . . 
+. . 4 5 5 5 5 4 4 5 5 5 5 4 . . 
+. . . 4 5 5 5 5 5 5 5 5 4 . . . 
+. . . 4 5 5 5 5 5 5 5 5 4 . . . 
+. . . 4 5 5 5 5 5 5 5 5 4 . . . 
+. . 4 5 5 5 5 5 5 5 5 5 5 4 . . 
+. 4 5 5 5 5 5 5 5 5 5 5 5 5 4 . 
+4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 
+. 4 4 4 4 5 5 5 5 5 5 4 4 4 4 . 
+. . . . . 4 5 5 5 5 4 . . . . . 
+. . . . . 4 5 5 5 5 4 . . . . . 
+. . . . . . 4 5 5 4 . . . . . . 
+. . . . . . 4 5 5 4 . . . . . . 
+. . . . . . . 4 4 . . . . . . . 
+`,img`
+. . . . . 5 5 . . . . . . . . . 
+. . . . 5 1 5 5 . . . . . . . . 
+. . . . 5 1 1 5 . . . . . . . . 
+. . . . 5 1 1 1 5 . . 5 5 5 . . 
+. . . . 5 1 1 1 1 5 5 1 1 1 5 . 
+. . . 5 1 1 1 1 1 1 1 1 1 1 5 . 
+. 5 5 1 1 1 1 1 1 1 1 1 1 5 . . 
+5 1 1 1 1 1 1 1 1 1 1 1 5 . . . 
+5 5 1 1 1 1 1 1 1 1 1 5 . . . . 
+. 5 5 1 1 1 1 1 1 1 1 1 5 . . . 
+. . . 5 5 1 1 1 1 1 1 1 1 5 . . 
+. . . . 5 1 1 1 1 1 1 1 1 5 . . 
+. . . . 5 1 1 1 5 5 1 1 1 1 5 . 
+. . . . 5 1 1 5 . . 5 5 1 1 5 . 
+. . . . 5 1 5 5 . . . . 5 5 5 . 
+. . . . . 5 5 . . . . . . . . . 
+`],
+    100,
+    true
+    )
 }
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
-    game.over(false)
-})
-controller.anyButton.onEvent(ControllerButtonEvent.Pressed, function () {
-    star.vy = -100
-})
-let projectile2: Sprite = null
-let projectile: Sprite = null
-let bottomimage: Image = null
-let topimage: Image = null
-let gap = 0
-let star: Sprite = null
-hero()
-scene.setBackgroundColor(15)
-effects.starField.startScreenEffect()
-game.onUpdateInterval(1500, function () {
+function powerdown () {
+    projectile3 = sprites.createProjectileFromSide(img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, -73, 0)
+    projectile3.setKind(SpriteKind.PowerDown)
+    projectile3.setPosition(170, Math.randomRange(0, 100))
+    animation.runImageAnimation(
+    projectile3,
+    [img`
+. . . . . . . c c . . . . . . . 
+. . . . . . c f f c . . . . . . 
+. . . . . . c f f c . . . . . . 
+. . . . . c f f f f c . . . . . 
+. . . . . c f f f f c . . . . . 
+. c c c c f f f f f f c c c c . 
+c f f f f f f f f f f f f f f c 
+. c f f f f f f f f f f f f c . 
+. . c f f f f f f f f f f c . . 
+. . . c f f f f f f f f c . . . 
+. . . c f f f f f f f f c . . . 
+. . . c f f f f f f f f c . . . 
+. . c f f f f c c f f f f c . . 
+. . c f f f c . . c f f f c . . 
+. . c f f c . . . . c f f c . . 
+. . . c c . . . . . . c c . . . 
+`,img`
+. . . . . . . . . f f . . . . . 
+. . . . . . . . f f a f . . . . 
+. . . . . . . . f a a f . . . . 
+. . f f f . . f a a a f . . . . 
+. f a a a f f a a a a f . . . . 
+. f a a a a a a a a a a f . . . 
+. . f a a a a a a a a a a f f . 
+. . . f a a a a a a a a a a a f 
+. . . . f a a a a a a a a a f f 
+. . . f a a a a a a a a a f f . 
+. . f a a a a a a a a f f . . . 
+. . f a a a a a a a a f . . . . 
+. f a a a a f f a a a f . . . . 
+. f a a f f . . f a a f . . . . 
+. f f f . . . . f f a f . . . . 
+. . . . . . . . . f f . . . . . 
+`,img`
+. . . c c . . . . . . c c . . . 
+. . c f f c . . . . c f f c . . 
+. . c f f f c . . c f f f c . . 
+. . c f f f f c c f f f f c . . 
+. . . c f f f f f f f f c . . . 
+. . . c f f f f f f f f c . . . 
+. . . c f f f f f f f f c . . . 
+. . c f f f f f f f f f f c . . 
+. c f f f f f f f f f f f f c . 
+c f f f f f f f f f f f f f f c 
+. c c c c f f f f f f c c c c . 
+. . . . . c f f f f c . . . . . 
+. . . . . c f f f f c . . . . . 
+. . . . . . c f f c . . . . . . 
+. . . . . . c f f c . . . . . . 
+. . . . . . . c c . . . . . . . 
+`,img`
+. . . . . f f . . . . . . . . . 
+. . . . f a f f . . . . . . . . 
+. . . . f a a f . . . . . . . . 
+. . . . f a a a f . . f f f . . 
+. . . . f a a a a f f a a a f . 
+. . . f a a a a a a a a a a f . 
+. f f a a a a a a a a a a f . . 
+f a a a a a a a a a a a f . . . 
+f f a a a a a a a a a f . . . . 
+. f f a a a a a a a a a f . . . 
+. . . f f a a a a a a a a f . . 
+. . . . f a a a a a a a a f . . 
+. . . . f a a a f f a a a a f . 
+. . . . f a a f . . f f a a f . 
+. . . . f a f f . . . . f f f . 
+. . . . . f f . . . . . . . . . 
+`],
+    100,
+    true
+    )
+}
+function beams () {
     info.changeScoreBy(1)
     gap = Math.randomRange(0, 3)
     if (gap == 0) {
@@ -292,6 +450,56 @@ game.onUpdateInterval(1500, function () {
     projectile.top = 0
     projectile = sprites.createProjectileFromSide(bottomimage, -45, 0)
     projectile.bottom = scene.screenHeight()
+}
+function hero () {
+    star = sprites.create(img`
+. . . . . . . 4 . . . . . . . . 
+. . . . . . . 5 4 . . . . . . . 
+. . . . . . 4 5 5 4 . . . . . . 
+. . . . . . 5 1 1 5 . . . . . . 
+. . . . . 4 5 1 1 5 4 . . . . . 
+. . . . . 5 1 1 1 1 5 4 . . . . 
+. . . . 4 5 4 1 1 4 1 5 5 4 . . 
+. . . 4 5 1 4 5 1 4 5 1 1 5 4 . 
+. . 4 5 1 1 5 4 1 5 4 1 5 4 . . 
+. . 5 5 1 1 1 1 1 1 1 5 4 . . . 
+. . . 4 5 5 1 1 5 1 1 1 5 . . . 
+. . . . 4 5 1 1 5 5 1 1 5 4 . . 
+. . . . 4 5 1 5 4 4 5 1 1 4 . . 
+. . . . . 5 5 4 . . . 4 1 5 . . 
+. . . . . 5 4 . . . . . . 4 . . 
+. . . . . 4 . . . . . . . . . . 
+`, SpriteKind.Player)
+    star.ay = 300
+}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.PowerUp, function (sprite, otherSprite) {
+    info.changeScoreBy(3)
+    projectile2.destroy()
+    star.say("+3 points", 500)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
+    game.over(false)
+})
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    star.vy = -100
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.PowerDown, function (sprite, otherSprite) {
+    info.changeScoreBy(-3)
+    projectile3.destroy()
+    star.say("-3 points", 500)
+})
+let star: Sprite = null
+let projectile: Sprite = null
+let bottomimage: Image = null
+let topimage: Image = null
+let gap = 0
+let projectile3: Sprite = null
+let projectile2: Sprite = null
+hero()
+scene.setBackgroundColor(8)
+effects.starField.startScreenEffect()
+game.onUpdateInterval(1500, function () {
+    beams()
 })
 game.onUpdate(function () {
     if (star.bottom > 120 || star.top < 0) {
@@ -301,80 +509,11 @@ game.onUpdate(function () {
         game.over(false)
     }
 })
+game.onUpdateInterval(6500, function () {
+    if (info.score() >= 50) {
+        powerdown()
+    }
+})
 game.onUpdateInterval(5000, function () {
-    projectile2 = sprites.createProjectileFromSide(img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-`, 50, 100)
-    animation.runImageAnimation(
-    projectile2,
-    [img`
-. . . . . . . f f . . . . . . . 
-. . . . . . f 5 5 f . . . . . . 
-. . . . . . f 5 5 f . . . . . . 
-. . . . . f 5 5 5 5 f . . . . . 
-. . . . . f 5 5 5 5 f . . . . . 
-. f f f f 5 5 5 5 5 5 f f f f . 
-f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
-. f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
-. . f 5 5 5 5 5 5 5 5 5 5 f . . 
-. . . f f 5 5 5 5 5 5 f f . . . 
-. . . f 5 5 5 5 5 5 5 5 f . . . 
-. . . f 5 5 5 5 5 5 5 5 f . . . 
-. . f 5 5 5 5 f f 5 5 5 5 f . . 
-. . f 5 5 5 f . . f 5 5 5 f . . 
-. . f 5 5 f . . . . f 5 5 f . . 
-. . . f f . . . . . . f f . . . 
-`,img`
-. . . . . . . . . f f . . . . . 
-. . . . . . . . f f 5 f . . . . 
-. . . . . . . . f 5 5 f . . . . 
-. . f f f . . f 5 5 5 f . . . . 
-. f 5 5 5 f f 5 5 5 5 f . . . . 
-. f 5 5 5 5 5 5 5 5 5 5 f . . . 
-. . f 5 5 5 5 5 5 5 5 5 5 f f . 
-. . . f 5 5 5 5 5 5 5 5 5 5 5 f 
-. . . . f 5 5 5 5 5 5 5 5 5 f f 
-. . . f 5 5 5 5 5 5 5 5 5 f f . 
-. . f 5 5 5 5 5 5 5 5 f f . . . 
-. . f 5 5 5 5 f 5 5 5 f . . . . 
-. f 5 5 5 5 f f 5 5 5 f . . . . 
-. f 5 5 f f . . f 5 5 f . . . . 
-. f f f . . . . f f 5 f . . . . 
-. . . . . . . . . f f . . . . . 
-`,img`
-. . . f f . . . . . . f f . . . 
-. . f 5 5 f . . . . f 5 5 f . . 
-. . f 5 5 5 f . . f 5 5 5 f . . 
-. . f 5 5 5 5 f f 5 5 5 5 f . . 
-. . . f 5 5 5 5 5 5 5 5 f . . . 
-. . . f 5 5 5 5 5 5 5 5 f . . . 
-. . . f f 5 5 5 5 5 5 f f . . . 
-. . f 5 5 5 5 5 5 5 5 5 5 f . . 
-. f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
-f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
-. f f f f 5 5 5 5 5 5 f f f f . 
-. . . . . f 5 5 5 5 f . . . . . 
-. . . . . f 5 5 5 5 f . . . . . 
-. . . . . . f 5 5 f . . . . . . 
-. . . . . . f 5 5 f . . . . . . 
-. . . . . . . f f . . . . . . . 
-`],
-    100,
-    false
-    )
+    powerup()
 })
