@@ -495,9 +495,9 @@ let gap = 0
 let projectile2: Sprite = null
 let star: Sprite = null
 let projectile3: Sprite = null
-let question = game.askForString("Name this character:")
+let question = game.askForString("Name your character:")
 game.splash("You named your character:", question)
-game.splash("Ok, good for you.", "It doesn't really matter")
+game.splash("Ok, good for you....", "It doesn't really matter.")
 scene.setBackgroundColor(8)
 effects.starField.startScreenEffect()
 hero()
