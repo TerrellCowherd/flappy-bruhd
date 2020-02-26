@@ -603,9 +603,15 @@ game.onUpdate(function () {
 })
 game.onUpdateInterval(6500, function () {
     if (info.score() >= 50) {
+        // this make you
+        //
+        // hurt
         powerdown()
     }
 })
 game.onUpdateInterval(5000, function () {
+    // this make you
+    //
+    // unhurt
     powerup()
 })
