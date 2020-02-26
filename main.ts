@@ -99,6 +99,91 @@ f f a a a a a a a a a f . . . .
     true
     )
 }
+function hover () {
+    if (info.score() >= 3) {
+        info.changeScoreBy(-3)
+        animation.runImageAnimation(
+        star,
+        [img`
+. . . . . . . 1 . . . . . . . . 
+. . . . . . . 4 1 . . . . . . . 
+. . . . . . 1 4 4 1 . . . . . . 
+. . . . . . 4 5 5 4 . . . . . . 
+. . . . . 1 4 5 5 4 1 . . . . . 
+. . . . . 4 5 5 5 5 4 1 . . . . 
+. . . . 1 4 5 5 5 5 5 4 4 1 . . 
+. . . 1 4 5 5 4 5 5 4 1 1 4 1 . 
+. . 1 4 5 5 1 1 4 1 1 1 4 1 . . 
+. . 4 4 5 5 5 5 5 5 5 4 1 . . . 
+. . . 1 4 4 5 5 4 5 5 5 4 . . . 
+. . . . 1 4 5 5 4 4 5 5 4 1 . . 
+. . . . 1 4 5 4 1 1 4 5 5 1 . . 
+. . . . . 4 4 1 . . . 1 5 4 . . 
+. . . . . 4 1 . . . . . . 1 . . 
+. . . . . 1 . . . . . . . . . . 
+`,img`
+. . . . . . . 5 . . . . . . . . 
+. . . . . . . 1 5 . . . . . . . 
+. . . . . . 5 1 1 5 . . . . . . 
+. . . . . . 1 4 4 1 . . . . . . 
+. . . . . 5 1 4 4 1 5 . . . . . 
+. . . . . 1 4 4 4 4 1 5 . . . . 
+. . . . 5 1 4 4 4 4 4 1 1 5 . . 
+. . . 5 1 4 4 1 4 4 1 4 4 1 5 . 
+. . 5 1 4 4 5 5 1 5 5 4 1 5 . . 
+. . 1 1 4 4 4 4 4 4 4 1 5 . . . 
+. . . 5 1 1 4 4 1 4 4 4 1 . . . 
+. . . . 5 1 4 4 1 1 4 4 1 5 . . 
+. . . . 5 1 4 1 5 5 1 4 4 5 . . 
+. . . . . 1 1 5 . . . 5 4 1 . . 
+. . . . . 1 5 . . . . . . 5 . . 
+. . . . . 5 . . . . . . . . . . 
+`,img`
+. . . . . . . 4 . . . . . . . . 
+. . . . . . . 5 4 . . . . . . . 
+. . . . . . 4 5 5 4 . . . . . . 
+. . . . . . 5 1 1 5 . . . . . . 
+. . . . . 4 5 1 1 5 4 . . . . . 
+. . . . . 5 1 1 1 1 5 4 . . . . 
+. . . . 4 5 1 1 1 1 1 5 5 4 . . 
+. . . 4 5 1 1 5 1 1 5 1 1 5 4 . 
+. . 4 5 1 1 4 4 5 4 4 1 5 4 . . 
+. . 5 5 1 1 1 1 1 1 1 5 4 . . . 
+. . . 4 5 5 1 1 5 1 1 1 5 . . . 
+. . . . 4 5 1 1 5 5 1 1 5 4 . . 
+. . . . 4 5 1 5 4 4 5 1 1 4 . . 
+. . . . . 5 5 4 . . . 4 1 5 . . 
+. . . . . 5 4 . . . . . . 4 . . 
+. . . . . 4 . . . . . . . . . . 
+`,img`
+. . . . . . . 4 . . . . . . . . 
+. . . . . . . 5 4 . . . . . . . 
+. . . . . . 4 5 5 4 . . . . . . 
+. . . . . . 5 1 1 5 . . . . . . 
+. . . . . 4 5 1 1 5 4 . . . . . 
+. . . . . 5 1 1 1 1 5 4 . . . . 
+. . . . 4 5 4 1 1 4 1 5 5 4 . . 
+. . . 4 5 1 4 5 1 4 5 1 1 5 4 . 
+. . 4 5 1 1 5 4 1 5 4 1 5 4 . . 
+. . 5 5 1 1 1 1 1 1 1 5 4 . . . 
+. . . 4 5 5 1 1 5 1 1 1 5 . . . 
+. . . . 4 5 1 1 5 5 1 1 5 4 . . 
+. . . . 4 5 1 5 4 4 5 1 1 4 . . 
+. . . . . 5 5 4 . . . 4 1 5 . . 
+. . . . . 5 4 . . . . . . 4 . . 
+. . . . . 4 . . . . . . . . . . 
+`],
+        150,
+        false
+        )
+        star.vy = 0
+        star.ay = 0
+        pause(250)
+        star.ay = 300
+    } else {
+        star.say("Need more points.", 300)
+    }
+}
 function hero () {
     star = sprites.create(img`
 . . . . . . . 4 . . . . . . . . 
@@ -120,6 +205,9 @@ function hero () {
 `, SpriteKind.Player)
     star.ay = 300
 }
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    hover()
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.PowerUp, function (sprite, otherSprite) {
     info.changeScoreBy(3)
     projectile2.destroy()
@@ -498,6 +586,7 @@ let projectile3: Sprite = null
 let question = game.askForString("Name your character:")
 game.splash("You named your character:", question)
 game.splash("Ok, good for you....", "It doesn't really matter.")
+game.splash("Also press B to hover.", "It costs 3 points though.")
 scene.setBackgroundColor(8)
 effects.starField.startScreenEffect()
 hero()
