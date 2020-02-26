@@ -615,3 +615,8 @@ game.onUpdateInterval(5000, function () {
     // unhurt
     powerup()
 })
+game.onUpdateInterval(10, function () {
+    if (info.score() > info.highScore()) {
+        star.say("New High Score!")
+    }
+})
