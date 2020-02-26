@@ -602,7 +602,7 @@ game.onUpdate(function () {
     }
 })
 game.onUpdateInterval(6500, function () {
-    if (info.score() >= 50) {
+    if (info.score() >= 20) {
         // this make you
         //
         // hurt
